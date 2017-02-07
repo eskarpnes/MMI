@@ -6,19 +6,19 @@
 
 <?import javafx.scene.shape.QuadCurve?>
 <Pane prefHeight="300" prefWidth="200">
-       <Line startX="10" startY="290" endX="190" endY="290" />
-       <Line startX="40" startY="290" endX="40" endY="10" />
-       <Line startX="40" startY="10" endX="130" endY="10" />
-       <Line startX="130" startY="10" endX="130" endY="40" />
-       <Circle centerX="130" centerY="70" radius="30" stroke="BLACK" fill="WHITE" />
-       <QuadCurve startX="120" startY="90" endX="140" endY="90" fill="WHITE" stroke="BLACK" controlX="130" controlY="75"/>
-       <Line startX="115" startY="65" endX="120" endY="70" />
-       <Line startX="120" startY="65" endX="115" endY="70" />
-       <Line startX="140" startY="65" endX="145" endY="70" />
-       <Line startX="145" startY="65" endX="140" endY="70" />
-       <Line startX="130" startY="100" endX="130" endY="200" />
-       <Line startX="130" startY="200" endX="90" endY="250" />
-       <Line startX="130" startY="200" endX="170" endY="250" />
-       <Line startX="130" startY="120" endX="170" endY="160" />
-       <Line startX="130" startY="120" endX="90" endY="160" />
+    <Line startX="10" startY="290" endX="190" endY="290"/>
+    <Line startX="40" startY="290" endX="40" endY="10"/>
+    <Line startX="40" startY="10" endX="130" endY="10"/>
+    <Line startX="130" startY="10" endX="130" endY="40"/>
+    <Circle centerX="130" centerY="70" radius="30" stroke="BLACK" fill="WHITE"/>
+    <QuadCurve startX="120" startY="90" endX="140" endY="90" fill="WHITE" stroke="BLACK" controlX="130" controlY="75"/>
+    <Line startX="115" startY="65" endX="120" endY="70"/>
+    <Line startX="120" startY="65" endX="115" endY="70"/>
+    <Line startX="140" startY="65" endX="145" endY="70"/>
+    <Line startX="145" startY="65" endX="140" endY="70"/>
+    <Line startX="130" startY="100" endX="130" endY="200"/>
+    <Line startX="130" startY="200" endX="90" endY="250"/>
+    <Line startX="130" startY="200" endX="170" endY="250"/>
+    <Line startX="130" startY="120" endX="170" endY="160"/>
+    <Line startX="130" startY="120" endX="90" endY="160"/>
 </Pane>
