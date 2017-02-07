@@ -1,8 +1,8 @@
 package personform;
-
+/**
 /**
  * Created by Erlend on 01.02.2017.
- */
+ *
 public class PersonController {
 
     private Person model;
@@ -37,4 +37,4 @@ public class PersonController {
         model.setEmail(emailField.getText());
     }
 
-}
+}*/
