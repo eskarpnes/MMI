@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.Circle?>
 
 <?import javafx.scene.shape.QuadCurve?>
-<Pane prefHeight="300" prefWidth="200">
+<Pane>
     <Line startX="10" startY="290" endX="190" endY="290"/>
     <Line startX="40" startY="290" endX="40" endY="10"/>
     <Line startX="40" startY="10" endX="130" endY="10"/>
