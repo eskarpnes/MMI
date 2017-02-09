@@ -58,20 +58,22 @@ public class Endomondo extends Application {
 
         Rectangle r00 = new Rectangle(250, 75);
         r00.setFill(Color.WHITE);
+
         Rectangle r01 = new Rectangle(250, 75);
         r01.setFill(Color.WHITE);
+
         Rectangle r10 = new Rectangle(500, 75);
         r10.setFill(Color.WHITESMOKE);
-        //Rectangle r11 = new Rectangle(250, 75);
+
         Rectangle r20 = new Rectangle(500, 75);
         r20.setFill(Color.WHITESMOKE);
-        //Rectangle r21 = new Rectangle(250, 75);
+
         Rectangle r30 = new Rectangle(247, 75);
         r30.setFill(Color.WHITESMOKE);
-        //Rectangle r31 = new Rectangle(125, 75);
+
         Rectangle r32 = new Rectangle(247, 75);
         r32.setFill(Color.WHITESMOKE);
-        //Rectangle r33 = new Rectangle(125, 75);
+
 
         GridPane gridPane = new GridPane();
 
@@ -79,10 +81,6 @@ public class Endomondo extends Application {
         gridPane.getColumnConstraints().add(new ColumnConstraints(97));
         gridPane.getColumnConstraints().add(new ColumnConstraints(147));
         gridPane.getColumnConstraints().add(new ColumnConstraints(97));
-
-        //gridPane.setVgap(5);
-        //gridPane.setPadding(new Insets(10,10,10,10));
-
 
         gridPane.setStyle("-fx-background-color: #ffffff");
 
