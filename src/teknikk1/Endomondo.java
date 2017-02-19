@@ -36,7 +36,7 @@ public class Endomondo extends Application {
         duration.setStyle("-fx-font-size: 20");
 
         Label time = new Label("0:57:24 ");
-        time.setStyle("-fx-font-size: 50; -fx-font-weight: bolder");
+        time.setStyle("-fx-font-size: 60; -fx-font-weight: bolder");
 
         Label distance = new Label(" Distance\n km");
         distance.setStyle("-fx-font-size: 20");
