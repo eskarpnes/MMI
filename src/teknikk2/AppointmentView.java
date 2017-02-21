@@ -5,6 +5,7 @@ package teknikk2;
  */
 
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.geometry.VPos;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -33,6 +34,7 @@ public class AppointmentView extends Application {
         reason_input.setMaxHeight(75);
         reason_input.setMaxWidth(200);
         reason_input.setWrapText(true);
+        reason_input.textProperty().addListener();
         grid.add(reason_input, 1,0);
 
         Label room = new Label("Rom: ");
