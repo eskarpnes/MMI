@@ -129,16 +129,12 @@ public class AppointmentController implements Initializable {
 
     @FXML
     private void frequency_changed() {
-        if (sanitize_input()) {
-            activate_button();
-        }
+        activate_button();
     }
 
     @FXML
     private void end_date_changed() {
-        if (sanitize_input()) {
-            activate_button();
-        }
+        activate_button();
     }
 
     private void activate_button() {
@@ -163,7 +159,7 @@ public class AppointmentController implements Initializable {
                 from_input_hours.getValue() != null && from_input_minutes.getValue() != null && to_input_hours.getValue() != null && to_input_minutes.getValue() != null)) {
             return false;
         }
-        if (!(!repetition_input.isSelected() || (repetition_input.isSelected() && Integer.parseInt(frequency_input.getText()) >= 0 && date_input.getValue() != null))) {
+        if (!(!repetition_input.isSelected() || (repetition_input.isSelected() && frequency_input.getText() != null && date_input.getValue() != null))) {
             return false;
         }
         if (from_input_hours.getValue() != null && from_input_minutes.getValue() != null && to_input_hours.getValue() != null && to_input_minutes.getValue() != null) {
