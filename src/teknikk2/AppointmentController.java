@@ -2,178 +2,219 @@ package teknikk2;
 
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
 
+import java.net.URL;
 import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.ResourceBundle;
 
 
 /**
  * Created by Erlend on 16.02.2017.
  */
-public class AppointmentController {
+public class AppointmentController implements Initializable {
 
     @FXML private TextArea reason_input;
-    @FXML private Text reason_input_valid;
 
-    @FXML private TextField room_input;
-    @FXML private Text room_input_valid;
+    @FXML private ComboBox building_input;
+    @FXML private ComboBox room_input;
 
     @FXML private DatePicker date_input;
 
-    @FXML private TextField from_input;
-    @FXML private Text from_input_valid;
-    private boolean valid_from_time;
+    @FXML private ComboBox from_input_hours;
+    @FXML private ComboBox from_input_minutes;
 
-    @FXML private TextField to_input;
-    @FXML private Text to_input_valid;
-    private boolean valid_to_time;
+    @FXML private ComboBox to_input_hours;
+    @FXML private ComboBox to_input_minutes;
 
-    @FXML private ComboBox repetition_input;
-
+    @FXML private CheckBox repetition_input;
+    @FXML private TextField frequency_input;
     @FXML private DatePicker end_date_input;
 
+    @FXML private Button submit_input;
+
+    @FXML private Label rep1;
+    @FXML private Label rep2;
+    @FXML private Label rep3;
+
     @FXML
-    private void reason_fieldFocusChange(ReadOnlyBooleanProperty property, Boolean old_value, Boolean new_value) {
-        if (!new_value) {
-            update_reason_model();
+    private void building_changed() {
+        System.out.println("hehe focus");
+        set_room_list();
+    }
+
+    private void set_room_list() {
+        String selected_item = building_input.getSelectionModel().getSelectedItem().toString();
+        if (selected_item.equals("Hovedbygget")) {
+            room_input.getItems().removeAll(room_input.getItems());
+            room_input.getItems().addAll(100,101,102);
+        }
+
+        else if (selected_item.equals("IT-Bygget")){
+            room_input.getItems().removeAll(room_input.getItems());
+            room_input.getItems().addAll(200,201,202);
+        }
+
+        else if (selected_item.equals("P15")){
+            room_input.getItems().removeAll(room_input.getItems());
+            room_input.getItems().addAll(300,301,302);
+        }
+
+        else if (selected_item.equals("Realfagsbygget")){
+            room_input.getItems().removeAll(room_input.getItems());
+            room_input.getItems().addAll(400,401,402);
         }
     }
 
-    private ChangeListener<String> reason_change_listener = (property, old_value, new_value) -> {
-       update_reason_view();
-    };
-
-    private ChangeListener<String> room_change_listener = (property, old_value, new_value) -> {
-        update_room_view();
-    };
-
-
-    private ChangeListener<LocalTime> from_change_listener = (property, old_value, new_value) -> {
-        update_from_view();
-    };
-
-    private ChangeListener<LocalTime> to_change_listener = (property, old_value, new_value) -> {
-        update_to_view();
-    };
-
-    private Appointment model;
-
-    public Appointment getModel() {
-        return model;
+    @FXML
+    private void room_changed() {
+        System.out.println("hehe focus");
     }
 
-    public void setModel(Appointment model) {
-        if (this.model != null) {
-            model.formalProperty().removeListener(reason_change_listener);
-            model.romProperty().removeListener(room_change_listener);
-            model.fraProperty().removeListener(from_change_listener);
-            model.tilProperty().removeListener(to_change_listener);
+    @FXML
+    private void date_changed() {
+
+    }
+
+    @FXML
+    private void from_hour_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void from_minutes_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void to_hour_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void to_minutes_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void repetition_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void frequency_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void end_date_changed() {
+        System.out.println("hehe focus");
+    }
+
+    @FXML
+    private void button_clicked() {
+        submit_input.setText("Done");
+        update_model();
+    }
+
+    private void sanitize_input() {
+        if (reason_input != null && building_input != null && room_input != null && date_input != null &&
+                from_input_hours != null && from_input_minutes != null && to_input_hours != null && to_input_minutes != null) {
+
         }
-        this.model = model;
-        update_view();
-        if (this.model != null) {
-            model.formalProperty().addListener(reason_change_listener);
-            model.romProperty().addListener(room_change_listener);
-            model.fraProperty().addListener(from_change_listener);
-            model.tilProperty().addListener(to_change_listener);
-        }
     }
 
-    private void update_view() {
-        update_reason_view();
-        update_room_view();
-        update_from_view();
-        update_to_view();
+    public void update_model() {
+        update_reason_model();
+        update_room_model();
+        update_date_model();
+        update_from_model();
+        update_to_model();
+        update_repetition_model();
+        update_end_date_model();
     }
 
-
-    private void update_reason_view() {
-        String reason = (model != null ? model.getFormal() : null);
-        reason_input.setText(reason != null ? reason : "");
-        reason_input.setEditable(model != null);
-    }
-
-    private void update_room_view() {
-        String room = (model != null ? model.getRom() : null);
-        room_input.setText(room != null ? room : "");
-        room_input.setEditable(model != null);
-    }
-
-    private void update_from_view() {
-        String from = (model != null ? model.getFra().toString() : null);
-        from_input.setText(from != null ? from : "");
-        from_input.setEditable(model != null);
-    }
-
-    private void update_to_view() {
-        String to = (model != null ? model.getTil().toString() : null);
-        to_input.setText(to != null ? to : "");
-        to_input.setEditable(model != null);
-    }
+    Appointment model = new Appointment();
 
     private void update_reason_model() {
         if (model != null) {
             model.setFormal(reason_input.getText());
+            print("The reason is: " + reason_input.getText());
         }
     }
 
     private void update_room_model() {
         if (model != null) {
-            model.setRom(room_input.getText().trim());
+            model.setRom(building_input.getValue().toString() + " " + room_input.getValue().toString());
+            print("The room is: " + building_input.getValue().toString() + " " + room_input.getValue().toString());
         }
     }
 
     private void update_date_model() {
         if (model != null) {
             model.setDato(date_input.getValue());
+            print("The date is: " + date_input.getValue().toString());
         }
     }
 
     //from_input must be LocalTime
     private void update_from_model() {
         if (model != null) {
-            try {
-                String[] from_tuple = from_input.getText().split(":");
-                LocalTime time = LocalTime.of(Integer.valueOf(from_tuple[0]), Integer.valueOf(from_tuple[1]));
-                model.setFra(time);
-            } catch (DateTimeException | NumberFormatException e) {
-                valid_from_time = false;
-            }
+            LocalTime time = LocalTime.of(Integer.parseInt(from_input_hours.getValue().toString()), Integer.parseInt(from_input_minutes.getValue().toString()));
+            model.setFra(time);
+            print("The start time is: " + time.toString());
         }
     }
 
     //to_input must be LocalTime
     private void update_to_model() {
         if (model != null) {
-            try {
-                String[] to_tuple = to_input.getText().split(":");
-                LocalTime time = LocalTime.of(Integer.valueOf(to_tuple[0]), Integer.valueOf(to_tuple[1]));
-                model.setTil(time);
-            } catch (DateTimeException | NumberFormatException e) {
-                valid_to_time = false;
-            }
+            LocalTime time = LocalTime.of(Integer.parseInt(to_input_hours.getValue().toString()), Integer.parseInt(to_input_minutes.getValue().toString()));
+            model.setTil(time);
+            print("The end time is: " + time.toString());
         }
     }
 
     private void update_repetition_model() {
         if (model != null) {
-            model.setRepetisjon(Integer.valueOf(repetition_input.getValue().toString()));
+            model.setRepetisjon(Integer.parseInt(repetition_input.getText()));
+            print("The repetition frequency is: " + repetition_input.getText());
         }
     }
 
     private void update_end_date_model() {
         if (model != null) {
             model.setSlutt(end_date_input.getValue());
+            print("The end date is: " + end_date_input.getValue().toString());
         }
+    }
+
+    private void print(String out) {
+        System.out.println(out);
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        from_input_hours.getItems().addAll("08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
+        to_input_hours.getItems().addAll("08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23");
+        from_input_minutes.getItems().addAll("00","15","30","45");
+        to_input_minutes.getItems().addAll("00","15","30","45");
+
+        building_input.getItems().addAll("Hovedbygget","IT-Bygget", "P15", "Realfagsbygget");
+
+        frequency_input.setDisable(true);
+        end_date_input.setDisable(true);
+        rep1.setDisable(true);
+        rep2.setDisable(true);
+        rep3.setDisable(true);
     }
 }
