@@ -1,5 +1,6 @@
 package teknikk2;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,9 +13,12 @@ import javafx.beans.property.ReadOnlyStringProperty;
 
 import java.net.URL;
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
 
 /**
@@ -45,9 +49,11 @@ public class AppointmentController implements Initializable {
     @FXML private Label rep2;
     @FXML private Label rep3;
 
+    @FXML private Label time_error;
+    @FXML private Label date_error;
+
     @FXML
     private void building_changed() {
-        System.out.println("hehe focus");
         set_room_list();
     }
 
@@ -76,60 +82,109 @@ public class AppointmentController implements Initializable {
 
     @FXML
     private void room_changed() {
-        System.out.println("hehe focus");
+        activate_button();
     }
 
     @FXML
     private void date_changed() {
-
+        activate_button();
     }
 
     @FXML
     private void from_hour_changed() {
-        System.out.println("hehe focus");
+        activate_button();
     }
 
     @FXML
     private void from_minutes_changed() {
-        System.out.println("hehe focus");
+        activate_button();
     }
 
     @FXML
     private void to_hour_changed() {
-        System.out.println("hehe focus");
+        activate_button();
     }
 
     @FXML
     private void to_minutes_changed() {
-        System.out.println("hehe focus");
+        activate_button();
     }
 
     @FXML
     private void repetition_changed() {
-        System.out.println("hehe focus");
+        if(repetition_input.isSelected()){
+            frequency_input.setDisable(false);
+            end_date_input.setDisable(false);
+            rep1.setDisable(false);
+            rep2.setDisable(false);
+            rep3.setDisable(false);
+        } else {
+            frequency_input.setDisable(true);
+            end_date_input.setDisable(true);
+            rep1.setDisable(true);
+            rep2.setDisable(true);
+            rep3.setDisable(true);
+        }
     }
 
     @FXML
     private void frequency_changed() {
-        System.out.println("hehe focus");
+        if (sanitize_input()) {
+            activate_button();
+        }
     }
 
     @FXML
     private void end_date_changed() {
-        System.out.println("hehe focus");
+        if (sanitize_input()) {
+            activate_button();
+        }
+    }
+
+    private void activate_button() {
+        if (sanitize_input()) {
+           submit_input.setDisable(false);
+        } else {
+            submit_input.setDisable(true);
+        }
     }
 
     @FXML
     private void button_clicked() {
         submit_input.setText("Done");
-        update_model();
+        if (sanitize_input()) {
+            update_model();
+        }
     }
 
-    private void sanitize_input() {
-        if (reason_input != null && building_input != null && room_input != null && date_input != null &&
-                from_input_hours != null && from_input_minutes != null && to_input_hours != null && to_input_minutes != null) {
+    private boolean sanitize_input() {
 
+        if (!(reason_input.getText() != null && building_input.getValue() != null && room_input.getValue() != null && date_input.getValue() != null &&
+                from_input_hours.getValue() != null && from_input_minutes.getValue() != null && to_input_hours.getValue() != null && to_input_minutes.getValue() != null)) {
+            return false;
         }
+        if (!(!repetition_input.isSelected() || (repetition_input.isSelected() && Integer.parseInt(frequency_input.getText()) >= 0 && date_input.getValue() != null))) {
+            return false;
+        }
+        if (from_input_hours.getValue() != null && from_input_minutes.getValue() != null && to_input_hours.getValue() != null && to_input_minutes.getValue() != null) {
+            LocalTime from = LocalTime.of(Integer.parseInt(from_input_hours.getValue().toString()), Integer.parseInt(from_input_minutes.getValue().toString()));
+            LocalTime to = LocalTime.of(Integer.parseInt(to_input_hours.getValue().toString()), Integer.parseInt(to_input_minutes.getValue().toString()));
+            if (to.isBefore(from)) {
+                time_error.setVisible(true);
+                return false;
+            }
+        }
+        if (repetition_input.isSelected() && date_input.getValue() != null && end_date_input.getValue() != null){
+            LocalDate start = date_input.getValue();
+            LocalDate end = end_date_input.getValue();
+            if (end.isBefore(start)) {
+                date_error.setVisible(true);
+                return false;
+            }
+        }
+        time_error.setVisible(false);
+        date_error.setVisible(false);
+        return true;
     }
 
     public void update_model() {
@@ -185,15 +240,19 @@ public class AppointmentController implements Initializable {
 
     private void update_repetition_model() {
         if (model != null) {
-            model.setRepetisjon(Integer.parseInt(repetition_input.getText()));
-            print("The repetition frequency is: " + repetition_input.getText());
+            if (!frequency_input.isDisabled()) {
+                model.setRepetisjon(Integer.parseInt(frequency_input.getText()));
+                print("The repetition frequency is: " + frequency_input.getText());
+            }
         }
     }
 
     private void update_end_date_model() {
         if (model != null) {
-            model.setSlutt(end_date_input.getValue());
-            print("The end date is: " + end_date_input.getValue().toString());
+            if (!end_date_input.isDisabled()) {
+                model.setSlutt(end_date_input.getValue());
+                print("The end date is: " + end_date_input.getValue().toString());
+            }
         }
     }
 
@@ -216,5 +275,6 @@ public class AppointmentController implements Initializable {
         rep1.setDisable(true);
         rep2.setDisable(true);
         rep3.setDisable(true);
+        submit_input.setDisable(true);
     }
 }

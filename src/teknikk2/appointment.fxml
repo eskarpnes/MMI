@@ -17,7 +17,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TextArea fx:id="reason_input" layoutX="96.0" layoutY="58.0" onInputMethodTextChanged="#reason_changed" prefHeight="75.0" prefWidth="200.0" />
+      <TextArea fx:id="reason_input" layoutX="96.0" layoutY="58.0" prefHeight="75.0" prefWidth="200.0" />
       <Label layoutX="25.0" layoutY="58.0" text="Reason: " />
       <Label layoutX="25.0" layoutY="143.0" text="Room: " />
       <ComboBox fx:id="building_input" layoutX="96.0" layoutY="139.0" onAction="#building_changed" prefWidth="150.0" promptText="Building" />
@@ -40,12 +40,14 @@
          </font>
       </Label>
       <ComboBox fx:id="to_input_minutes" layoutX="157.0" layoutY="249.0" onAction="#to_minutes_changed" prefHeight="25.0" prefWidth="55.0" />
-      <CheckBox fx:id="reptition_input" layoutX="27.0" layoutY="301.0" mnemonicParsing="false" onAction="#repetition_changed" text="Repetition" />
+      <CheckBox fx:id="repetition_input" layoutX="27.0" layoutY="301.0" mnemonicParsing="false" onAction="#repetition_changed" text="Repetition" />
       <TextField fx:id="frequency_input" layoutX="60.0" layoutY="336.0" onAction="#frequency_changed" prefHeight="25.0" prefWidth="55.0" />
-      <Label layoutX="25.0" layoutY="340.0" text="Every" />
-      <Label layoutX="122.0" layoutY="340.0" text="days." />
-      <Label layoutX="162.0" layoutY="340.0" text="End date: " />
+      <Label fx:id="rep1" layoutX="25.0" layoutY="340.0" text="Every" />
+      <Label fx:id="rep2" layoutX="122.0" layoutY="340.0" text="days." />
+      <Label fx:id="rep3" layoutX="162.0" layoutY="340.0" text="End date: " />
       <DatePicker fx:id="end_date_input" layoutX="217.0" layoutY="336.0" onAction="#end_date_changed" />
       <Button fx:id="submit_input" layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#button_clicked" text="Submit" />
+      <Label fx:id="time_error" text="The from time can't be after the to time" visible="false"/>
+      <Label fx:id="date_error" text="The end date can't be before the start date" visible="false"/>
    </children>
 </Pane>
