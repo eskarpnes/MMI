@@ -21,9 +21,6 @@ import java.util.ResourceBundle;
 import java.util.StringJoiner;
 
 
-/**
- * Created by Erlend on 16.02.2017.
- */
 public class AppointmentController implements Initializable {
 
     @FXML private TextArea reason_input;

@@ -1,9 +1,5 @@
 package teknikk2;
 
-/**
- * Created by Erlend on 16.02.2017.
- */
-
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyBooleanProperty;
 import javafx.event.ActionEvent;
