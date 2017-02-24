@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import teknikk2.*;
 
+import java.time.LocalTime;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -144,7 +145,7 @@ public class AppointmentController {
 
         if (allFieldsCorrect()) {
 
-           // updatemodel();
+            updatemodel();
 
             formål.setText("");
             rom.setText("");
@@ -158,8 +159,8 @@ public class AppointmentController {
         }
 
     }
-   /*
-    maria_teknikk2.Appointment model = new teknikk2.Appointment();
+
+    private Appointment model = new Appointment();
 
     private void updatemodel() {
         updateFormålModel();
@@ -171,15 +172,9 @@ public class AppointmentController {
         updateSluttidspunktModel();
     }
 
-    private void updateRepetisjonsModel() {
+    private void updateFormålModel() {
         if (model != null) {
-            model.setDato(repetisjonssekvens.getText());
-        }
-    }
-
-    private void updateDateModel() {
-        if (model != null) {
-            model.setDato(dato.getText());
+            model.setFormal(formål.getText());
         }
     }
 
@@ -189,31 +184,43 @@ public class AppointmentController {
         }
     }
 
-    private void updateFormålModel() {
+    private void updateDateModel() {
         if (model != null) {
-            model.setFormal(formål.getText());
+            model.setDato(dato.getValue());
         }
     }
 
     private void updateFratidspunktModel() {
         if (model != null) {
-            model.setDato(fratidspunkt.getText());
+            int time = Integer.parseInt(fratidspunkt.getText().substring(0,2));
+            int min = Integer.parseInt(fratidspunkt.getText().substring(3,5));
+            LocalTime localTime = LocalTime.of(time, min);
+            model.setFra(localTime);
         }
-
     }
 
     private void updateTiltidspunktModel() {
         if (model != null) {
-            model.setDato(tiltidspunkt.getText());
+            int time = Integer.parseInt(tiltidspunkt.getText().substring(0,2));
+            int min = Integer.parseInt(tiltidspunkt.getText().substring(3,5));
+            LocalTime localTime = LocalTime.of(time, min);
+            model.setTil(localTime);
+        }
+    }
+
+    private void updateRepetisjonsModel() {
+        if (model != null) {
+            if (!repetisjonssekvens.getText().isEmpty()) {
+                model.setRepetisjon(Integer.parseInt(repetisjonssekvens.getText()));
+            }
         }
     }
 
     private void updateSluttidspunktModel() {
         if (model != null) {
-            if (!sluttdato.getText().isEmpty()) {
-                model.setSlutt(sluttdato.getText());
+            if (!repetisjonssekvens.getText().isEmpty()) {
+                model.setSlutt(sluttdato.getValue());
             }
         }
     }
-*/
 }
