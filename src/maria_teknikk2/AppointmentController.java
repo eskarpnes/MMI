@@ -1,5 +1,6 @@
 package maria_teknikk2;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -225,6 +226,25 @@ public class AppointmentController {
         if (model != null) {
             if (!repetisjonssekvens.getText().isEmpty()) {
                 model.setSlutt(sluttdato.getValue());
+            }
+        }
+    }
+
+    public void showAllAppointments() {
+        System.out.println("There are " + appointments.size() + " appointments saved:\n");
+
+        int i = 0;
+        for (Appointment app : appointments) {
+            i++;
+            System.out.println("\n#" + i);
+            System.out.println("Formål: " + app.getFormal());
+            System.out.println("Rom: " + app.getRom());
+            System.out.println("Dato: " + app.getDato());
+            System.out.println("Fra-tidspunkt: " + app.getFra());
+            System.out.println("Til-tidspunkt: " + app.getTil());
+            if (app.getRepetisjon() != 0) {
+                System.out.println("Repetisjonssekvens: " + app.getRepetisjon());
+                System.out.println("Til dato: " + app.getSlutt());
             }
         }
     }
