@@ -1,8 +1,10 @@
 package maria_teknikk2;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import teknikk2.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +24,7 @@ public class AppointmentController {
     private Label rom_error;
 
     @FXML
-    private TextField dato;
+    private DatePicker dato;
 
     @FXML
     private Label dato_error;
@@ -46,7 +48,7 @@ public class AppointmentController {
     private Label repetisjonssekvens_error;
 
     @FXML
-    private TextField sluttdato;
+    private DatePicker sluttdato;
 
     @FXML
     private Label sluttdato_error;
@@ -57,12 +59,6 @@ public class AppointmentController {
 
     private boolean legalRoom(String string) {
         Pattern p = Pattern.compile("[a-zA-Z0-9\\s\\-]+[\\s][0-9]+");
-        Matcher m = p.matcher(string);
-        return m.matches();
-    }
-
-    private boolean legalDate(String string) {
-        Pattern p = Pattern.compile("[0-9]{2}[.][0-9]{2}[.][0-9]{4}");
         Matcher m = p.matcher(string);
         return m.matches();
     }
@@ -102,10 +98,10 @@ public class AppointmentController {
     }
 
     private boolean allFieldsCorrect() {
-        return !formål.getText().isEmpty() && legalRoom(rom.getText()) && legalDate(dato.getText())
+        return !formål.getText().isEmpty() && legalRoom(rom.getText()) && dato.getValue() != null
                 && legalTidspunkt(tiltidspunkt.getText()) && legalTidspunkt(fratidspunkt.getText())
                 && legalTilTidspunkt(fratidspunkt.getText(), tiltidspunkt.getText())
-                && (repetisjonssekvens.getText().isEmpty() || legalDate(sluttdato.getText()));
+                && (repetisjonssekvens.getText().isEmpty() || sluttdato.getValue() != null);
     }
 
     public void button_clicked() {
@@ -124,7 +120,7 @@ public class AppointmentController {
         if (!legalRoom(rom.getText())) {
             rom_error.setVisible(true);
         }
-        if (!legalDate(dato.getText())) {
+        if (dato.getValue() == null) {
             dato_error.setVisible(true);
         }
         if (!legalTidspunkt(fratidspunkt.getText())) {
@@ -142,22 +138,82 @@ public class AppointmentController {
         if (!legalRepetisjonssekvens(repetisjonssekvens.getText()) && !repetisjonssekvens.getText().isEmpty()) {
             repetisjonssekvens_error.setVisible(true);
         }
-        if (!legalDate(sluttdato.getText()) && !repetisjonssekvens.getText().isEmpty()) {
+        if (sluttdato == null && !repetisjonssekvens.getText().isEmpty()) {
             sluttdato_error.setVisible(true);
         }
 
         if (allFieldsCorrect()) {
+
+           // updatemodel();
+
             formål.setText("");
             rom.setText("");
-            dato.setText("");
+            dato.setValue(null);
             fratidspunkt.setText("");
             tiltidspunkt.setText("");
             repetisjonssekvens.setText("");
-            sluttdato.setText("");
+            sluttdato.setValue(null);
 
             saved.setVisible(true);
         }
 
     }
+   /*
+    maria_teknikk2.Appointment model = new teknikk2.Appointment();
 
+    private void updatemodel() {
+        updateFormålModel();
+        updateRoomModel();
+        updateDateModel();
+        updateFratidspunktModel();
+        updateTiltidspunktModel();
+        updateRepetisjonsModel();
+        updateSluttidspunktModel();
+    }
+
+    private void updateRepetisjonsModel() {
+        if (model != null) {
+            model.setDato(repetisjonssekvens.getText());
+        }
+    }
+
+    private void updateDateModel() {
+        if (model != null) {
+            model.setDato(dato.getText());
+        }
+    }
+
+    private void updateRoomModel() {
+        if (model != null) {
+            model.setRom(rom.getText());
+        }
+    }
+
+    private void updateFormålModel() {
+        if (model != null) {
+            model.setFormal(formål.getText());
+        }
+    }
+
+    private void updateFratidspunktModel() {
+        if (model != null) {
+            model.setDato(fratidspunkt.getText());
+        }
+
+    }
+
+    private void updateTiltidspunktModel() {
+        if (model != null) {
+            model.setDato(tiltidspunkt.getText());
+        }
+    }
+
+    private void updateSluttidspunktModel() {
+        if (model != null) {
+            if (!sluttdato.getText().isEmpty()) {
+                model.setSlutt(sluttdato.getText());
+            }
+        }
+    }
+*/
 }

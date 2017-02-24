@@ -7,8 +7,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <GridPane fx:controller="maria_teknikk2.AppointmentController"
-        xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="10">
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="10">
    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
 
    <Text text="Velkommen" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
@@ -22,7 +23,7 @@
    <Label fx:id="rom_error" text="Ikke gyldig rom." GridPane.columnIndex="2" GridPane.rowIndex="2" visible="false"/>
 
    <Label text="Dato" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-   <TextField fx:id="dato" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+   <DatePicker fx:id="dato" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
    <Label fx:id="dato_error" text="Ikke gyldig datoformat." GridPane.columnIndex="2" GridPane.rowIndex="3" visible="false"/>
 
    <Label text="Fra-tidspunkt" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
@@ -38,7 +39,7 @@
    <Label fx:id="repetisjonssekvens_error" text="Repetisjonssekvens må være tall." GridPane.columnIndex="2" GridPane.rowIndex="6" visible="false"/>
 
    <Label text="Slutt-dato" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-   <TextField fx:id="sluttdato" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+   <DatePicker fx:id="sluttdato" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
    <Label fx:id="sluttdato_error" text="Ikke gyldig sluttdato." GridPane.columnIndex="2" GridPane.rowIndex="7" visible="false"/>
 
    <Button onAction="#button_clicked" text="Lagre" GridPane.rowIndex="8" GridPane.columnIndex="1" GridPane.columnSpan="1"/>
