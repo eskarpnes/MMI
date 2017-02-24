@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BorderPane xmlns:fx="" prefHeight="500" prefWidth="500">
+<top>
+<TextField id="textField" text="center"/>
+</top>
+<center>
+<Pane>
+<Line startX="10" startY="10" endX="100" endY="100">
+<strokeDashArray><Double fx:value="10"/><Double fx:value="10"/></strokeDashArray>
+</Line>
+<Rectangle x="150" y="10" width="30" height="40" fill="blue"/>
+<Text id="centerText" x="180" y="180" text="center">
+<font>
+<Font name="Times" size="32"/>
+</font>
+</Text>
+</Pane>
+</center>
+<left>
+<Text text="left"/>
+</left>
+<right>
+<Text text="right"/>
+</right>
+<bottom>
+<Text bottom="bottom"/>
+</bottom>
+</BorderPane>

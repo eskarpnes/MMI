@@ -29,7 +29,7 @@ public class AppointmentController {
 
     public boolean legalRoom(String string) {
         String[] array = string.split(" ");
-        String numbers = array[-1];
+        String numbers = array[0];
         for (int i = 0; i < numbers.length(); i++) {
             char number = numbers.charAt(i);
             if (number <= 0 || number >= 9) {
@@ -123,7 +123,10 @@ public class AppointmentController {
     }
 
     public void button_clicked() {
-        print("hey");
+        if (formål.getText().isEmpty() || !legalRoom(rom.getText())) {
+            print("null");
+        }
+
     }
 
 

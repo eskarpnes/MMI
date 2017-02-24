@@ -13,18 +13,18 @@
 
    <Text text="Velkommen" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
    <Label text="Formål" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-   <TextField id="formål" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+   <TextField fx:id="formål" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
    <Label text="Rom" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-   <TextField id="rom" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+   <TextField fx:id="rom" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
    <Label text="Dato" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-   <TextField id="dato" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+   <TextField fx:id="dato" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
    <Label text="Fra-tidspunkt" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-   <TextField id="fratidspunkt" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+   <TextField fx:id="fratidspunkt" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
    <Label text="Til-tidspunkt" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-   <TextField id="tiltidspunkt" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+   <TextField fx:id="tiltidspunkt" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
    <Label text="Repetisjonssekvens" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-   <TextField id="repetisjonssekvens" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+   <TextField fx:id="repetisjonssekvens" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
    <Label text="Slutt-dato" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-   <TextField id="sluttdato" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+   <TextField fx:id="sluttdato" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
    <Button onAction="#button_clicked" text="Lagre" GridPane.rowIndex="8" GridPane.columnSpan="2"/>
 </GridPane>
