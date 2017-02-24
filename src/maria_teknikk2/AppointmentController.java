@@ -7,10 +7,14 @@ import javafx.scene.control.TextField;
 import teknikk2.*;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AppointmentController {
+
+    private List<Appointment> appointments = new ArrayList<>();
 
     @FXML
     private TextField formål;
@@ -111,7 +115,7 @@ public class AppointmentController {
         dato_error.setVisible(false);
         fratidspunkt_error.setVisible(false);
         tiltidspunkt_error.setVisible(false);
-        tiltidspunkt_error.setText("Ikke gyldig tiltidspunkt.");
+        tiltidspunkt_error.setText("Ikke gyldig til-tidspunkt.");
         repetisjonssekvens_error.setVisible(false);
         sluttdato_error.setVisible(false);
 
@@ -145,7 +149,9 @@ public class AppointmentController {
 
         if (allFieldsCorrect()) {
 
-            updatemodel();
+            Appointment model = new Appointment();
+            updatemodel(model);
+            appointments.add(model);
 
             formål.setText("");
             rom.setText("");
@@ -160,37 +166,36 @@ public class AppointmentController {
 
     }
 
-    private Appointment model = new Appointment();
 
-    private void updatemodel() {
-        updateFormålModel();
-        updateRoomModel();
-        updateDateModel();
-        updateFratidspunktModel();
-        updateTiltidspunktModel();
-        updateRepetisjonsModel();
-        updateSluttidspunktModel();
+    private void updatemodel(Appointment model) {
+        updateFormålModel(model);
+        updateRoomModel(model);
+        updateDateModel(model);
+        updateFratidspunktModel(model);
+        updateTiltidspunktModel(model);
+        updateRepetisjonsModel(model);
+        updateSluttidspunktModel(model);
     }
 
-    private void updateFormålModel() {
+    private void updateFormålModel(Appointment model) {
         if (model != null) {
             model.setFormal(formål.getText());
         }
     }
 
-    private void updateRoomModel() {
+    private void updateRoomModel(Appointment model) {
         if (model != null) {
             model.setRom(rom.getText());
         }
     }
 
-    private void updateDateModel() {
+    private void updateDateModel(Appointment model) {
         if (model != null) {
             model.setDato(dato.getValue());
         }
     }
 
-    private void updateFratidspunktModel() {
+    private void updateFratidspunktModel(Appointment model) {
         if (model != null) {
             int time = Integer.parseInt(fratidspunkt.getText().substring(0,2));
             int min = Integer.parseInt(fratidspunkt.getText().substring(3,5));
@@ -199,7 +204,7 @@ public class AppointmentController {
         }
     }
 
-    private void updateTiltidspunktModel() {
+    private void updateTiltidspunktModel(Appointment model) {
         if (model != null) {
             int time = Integer.parseInt(tiltidspunkt.getText().substring(0,2));
             int min = Integer.parseInt(tiltidspunkt.getText().substring(3,5));
@@ -208,7 +213,7 @@ public class AppointmentController {
         }
     }
 
-    private void updateRepetisjonsModel() {
+    private void updateRepetisjonsModel(Appointment model) {
         if (model != null) {
             if (!repetisjonssekvens.getText().isEmpty()) {
                 model.setRepetisjon(Integer.parseInt(repetisjonssekvens.getText()));
@@ -216,7 +221,7 @@ public class AppointmentController {
         }
     }
 
-    private void updateSluttidspunktModel() {
+    private void updateSluttidspunktModel(Appointment model) {
         if (model != null) {
             if (!repetisjonssekvens.getText().isEmpty()) {
                 model.setSlutt(sluttdato.getValue());
