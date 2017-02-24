@@ -12,37 +12,37 @@
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="30" vgap="10">
    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
 
-   <Text text="Velkommen" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+   <Text text="Velkommen" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"  textAlignment="CENTER"/>
 
    <Label text="Formål" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-   <TextField fx:id="formål" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1"/>
+   <TextField fx:id="formål" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" onMouseClicked="#remove_saved"/>
    <Label fx:id="formål_error" text="Fyll inn formål." GridPane.columnIndex="3" GridPane.rowIndex="1" visible="false" textFill="red"/>
 
    <Label text="Rom" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-   <TextField fx:id="rom" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="2"/>
+   <TextField fx:id="rom" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
    <Label fx:id="rom_error" text="Ikke gyldig rom." GridPane.columnIndex="3" GridPane.rowIndex="2" visible="false"  textFill="red"/>
 
    <Label text="Dato" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-   <DatePicker fx:id="dato" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="3"/>
+   <DatePicker fx:id="dato" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
    <Label fx:id="dato_error" text="Ikke gyldig datoformat." GridPane.columnIndex="3" GridPane.rowIndex="3" visible="false"  textFill="red"/>
 
    <Label text="Fra-tidspunkt" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-   <TextField fx:id="fratidspunkt" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="4"/>
+   <TextField fx:id="fratidspunkt" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
    <Label fx:id="fratidspunkt_error" text="Ikke gyldig fra-tidspunkt." GridPane.columnIndex="3" GridPane.rowIndex="4" visible="false"  textFill="red"/>
 
    <Label text="Til-tidspunkt" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-   <TextField fx:id="tiltidspunkt" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="5"/>
+   <TextField fx:id="tiltidspunkt" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5"/>
    <Label fx:id="tiltidspunkt_error" text="Ikke gyldig til-tidspunkt." GridPane.columnIndex="3" GridPane.rowIndex="5" visible="false"  textFill="red"/>
 
    <Label text="Repetisjonssekvens" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-   <TextField fx:id="repetisjonssekvens" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="6"/>
+   <TextField fx:id="repetisjonssekvens" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6"/>
    <Label fx:id="repetisjonssekvens_error" text="Repetisjonssekvens må være tall." GridPane.columnIndex="3" GridPane.rowIndex="6" visible="false"  textFill="red"/>
 
    <Label text="Slutt-dato" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-   <DatePicker fx:id="sluttdato" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="7"/>
+   <DatePicker fx:id="sluttdato" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7"/>
    <Label fx:id="sluttdato_error" text="Ikke gyldig sluttdato." GridPane.columnIndex="3" GridPane.rowIndex="7" visible="false"  textFill="red"/>
 
-   <Button onAction="#button_clicked" text="Lagre" GridPane.rowIndex="8" GridPane.columnIndex="1" GridPane.columnSpan="1"/>
+   <Button onAction="#button_clicked" text="Lagre" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
    <Button onAction="#showAllAppointments" text="Vis alle avtaler" GridPane.rowIndex="8" GridPane.columnIndex="2"/>
    <Label fx:id="saved" text="Avtale lagret" GridPane.rowIndex="8" GridPane.columnIndex="3" visible="false" />
 

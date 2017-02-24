@@ -248,4 +248,8 @@ public class AppointmentController {
             }
         }
     }
+
+    public void remove_saved() {
+        saved.setVisible(false);
+    }
 }
