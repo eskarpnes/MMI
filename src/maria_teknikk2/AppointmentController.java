@@ -1,6 +1,7 @@
 package maria_teknikk2;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.util.regex.Matcher;
@@ -12,22 +13,46 @@ public class AppointmentController {
     private TextField formål;
 
     @FXML
+    private Label formål_error;
+
+    @FXML
     private TextField rom;
+
+    @FXML
+    private Label rom_error;
 
     @FXML
     private TextField dato;
 
     @FXML
+    private Label dato_error;
+
+    @FXML
     private TextField fratidspunkt;
+
+    @FXML
+    private Label fratidspunkt_error;
 
     @FXML
     private TextField tiltidspunkt;
 
     @FXML
+    private Label tiltidspunkt_error;
+
+    @FXML
     private TextField repetisjonssekvens;
 
     @FXML
+    private Label repetisjonssekvens_error;
+
+    @FXML
     private TextField sluttdato;
+
+    @FXML
+    private Label sluttdato_error;
+
+    @FXML
+    private Label saved;
 
 
     private boolean legalRoom(String string) {
@@ -76,32 +101,63 @@ public class AppointmentController {
         return m.matches();
     }
 
+    private boolean allFieldsCorrect() {
+        return !formål.getText().isEmpty() && legalRoom(rom.getText()) && legalDate(dato.getText())
+                && legalTidspunkt(tiltidspunkt.getText()) && legalTidspunkt(fratidspunkt.getText())
+                && legalTilTidspunkt(fratidspunkt.getText(), tiltidspunkt.getText())
+                && (repetisjonssekvens.getText().isEmpty() || legalDate(sluttdato.getText()));
+    }
+
     public void button_clicked() {
+        formål_error.setVisible(false);
+        rom_error.setVisible(false);
+        dato_error.setVisible(false);
+        fratidspunkt_error.setVisible(false);
+        tiltidspunkt_error.setVisible(false);
+        tiltidspunkt_error.setText("Ikke gyldig tiltidspunkt.");
+        repetisjonssekvens_error.setVisible(false);
+        sluttdato_error.setVisible(false);
+
         if (formål.getText().isEmpty()) {
-            System.out.println("Fyll inn formål.");
+            formål_error.setVisible(true);
         }
-        else if (!legalRoom(rom.getText())) {
-            System.out.println("Ikke gyldig rom.");
+        if (!legalRoom(rom.getText())) {
+            rom_error.setVisible(true);
         }
-        else if (!legalDate(dato.getText())) {
-            System.out.println("Ikke gyldig dato.");
+        if (!legalDate(dato.getText())) {
+            dato_error.setVisible(true);
         }
-        else if (!legalTidspunkt(fratidspunkt.getText())) {
-            System.out.println("Ikke gyldig fra-tidspunkt.");
+        if (!legalTidspunkt(fratidspunkt.getText())) {
+            fratidspunkt_error.setVisible(true);
         }
-        else if (!legalTidspunkt(fratidspunkt.getText())) {
-            System.out.println("Ikke gyldig til-tidspunkt");
+        if (!legalTidspunkt(tiltidspunkt.getText())) {
+            tiltidspunkt_error.setVisible(true);
+        }
+        if (legalTidspunkt(fratidspunkt.getText()) && legalTidspunkt(tiltidspunkt.getText())) {
+            if (!legalTilTidspunkt(fratidspunkt.getText(), tiltidspunkt.getText())) {
+                tiltidspunkt_error.setText("Til-tidspunkt må være etter fra-tidspunkt.");
+                tiltidspunkt_error.setVisible(true);
+            }
+        }
+        if (!legalRepetisjonssekvens(repetisjonssekvens.getText()) && !repetisjonssekvens.getText().isEmpty()) {
+            repetisjonssekvens_error.setVisible(true);
+        }
+        if (!legalDate(sluttdato.getText()) && !repetisjonssekvens.getText().isEmpty()) {
+            sluttdato_error.setVisible(true);
         }
 
-        else if (!legalTilTidspunkt(fratidspunkt.getText(), tiltidspunkt.getText())) {
-            System.out.println("Til-tidspunkt må være etter fra-tidspunkt.");
+        if (allFieldsCorrect()) {
+            formål.setText("");
+            rom.setText("");
+            dato.setText("");
+            fratidspunkt.setText("");
+            tiltidspunkt.setText("");
+            repetisjonssekvens.setText("");
+            sluttdato.setText("");
+
+            saved.setVisible(true);
         }
-        else if (!legalRepetisjonssekvens(repetisjonssekvens.getText())) {
-            System.out.println("Repetisjonssekvens må være tall.");
-        }
-        else {
-            System.out.println("riktig");
-        }
+
     }
 
 }
