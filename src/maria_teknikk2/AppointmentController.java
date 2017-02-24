@@ -3,6 +3,9 @@ package maria_teknikk2;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class AppointmentController {
 
     @FXML
@@ -27,80 +30,25 @@ public class AppointmentController {
     private TextField sluttdato;
 
 
-    public boolean legalRoom(String string) {
-        String[] array = string.split(" ");
-        String numbers = array[0];
-        for (int i = 0; i < numbers.length(); i++) {
-            char number = numbers.charAt(i);
-            if (number <= 0 || number >= 9) {
-                return false;
-            }
-        }
-        for (String word : array) {
-            for (int i = 0; i < word.length(); i++) {
-                char ch = word.charAt(i);
-                if (!(ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' &&  ch <= '9' || ch == '-')) {
-                    return false;
-                }
-            }
-        }
-        return true;
+    private boolean legalRoom(String string) {
+        Pattern p = Pattern.compile("[a-zA-Z0-9\\s\\-]+[\\s][0-9]+");
+        Matcher m = p.matcher(string);
+        return m.matches();
     }
 
-    public boolean legalDate(String string) {
-        if (string.length()!=9) {
-            return false;
-        }
-        if (string.charAt(0) <= 0 && string.charAt(0) >= 9) {
-            return false;
-        }
-        if (string.charAt(1) <= 0 && string.charAt(1) >= 9) {
-            return false;
-        }
-        if (string.charAt(2) != '/') {
-            return false;
-        }
-        if (string.charAt(3) <= 0 && string.charAt(3) >= 9) {
-            return false;
-        }
-        if (string.charAt(4) != '-') {
-            return false;
-        }
-        if (string.charAt(5) <= 0 && string.charAt(5) >= 9) {
-            return false;
-        }
-        if (string.charAt(6) <= 0 && string.charAt(6) >= 9) {
-            return false;
-        }
-        if (string.charAt(7) <= 0 && string.charAt(7) >= 9) {
-            return false;
-        }
-        if (string.charAt(8) <= 0 && string.charAt(8) >= 9) {
-            return false;
-        }
-        return true;
+    private boolean legalDate(String string) {
+        Pattern p = Pattern.compile("[0-9]{2}[.][0-9]{2}[.][0-9]{4}");
+        Matcher m = p.matcher(string);
+        return m.matches();
     }
 
-    public boolean legalTidspunkt(String string) {
-        if (string.charAt(0) <= 0 && string.charAt(0) >= 9) {
-            return false;
-        }
-        if (string.charAt(1) <= 0 && string.charAt(1) >= 9) {
-            return false;
-        }
-        if (string.charAt(2) != ':') {
-            return false;
-        }
-        if (string.charAt(3) <= 0 && string.charAt(3) >= 9) {
-            return false;
-        }
-        if (string.charAt(4) <= 0 && string.charAt(4) >= 9) {
-            return false;
-        }
-        return true;
+    private boolean legalTidspunkt(String string) {
+        Pattern p = Pattern.compile("[0-9]{2}[:][0-9]{2}");
+        Matcher m = p.matcher(string);
+        return m.matches();
     }
 
-    public boolean legalTilTidspunkt(String fra, String til) {
+    private boolean legalTilTidspunkt(String fra, String til) {
         if (til.charAt(0) < fra.charAt(0)) {
             return false;
         }
@@ -122,15 +70,38 @@ public class AppointmentController {
         return true;
     }
 
+    private boolean legalRepetisjonssekvens(String string) {
+        Pattern p = Pattern.compile("[0-9]+");
+        Matcher m = p.matcher(string);
+        return m.matches();
+    }
+
     public void button_clicked() {
-        if (formål.getText().isEmpty() || !legalRoom(rom.getText())) {
-            print("null");
+        if (formål.getText().isEmpty()) {
+            System.out.println("Fyll inn formål.");
+        }
+        else if (!legalRoom(rom.getText())) {
+            System.out.println("Ikke gyldig rom.");
+        }
+        else if (!legalDate(dato.getText())) {
+            System.out.println("Ikke gyldig dato.");
+        }
+        else if (!legalTidspunkt(fratidspunkt.getText())) {
+            System.out.println("Ikke gyldig fra-tidspunkt.");
+        }
+        else if (!legalTidspunkt(fratidspunkt.getText())) {
+            System.out.println("Ikke gyldig til-tidspunkt");
         }
 
+        else if (!legalTilTidspunkt(fratidspunkt.getText(), tiltidspunkt.getText())) {
+            System.out.println("Til-tidspunkt må være etter fra-tidspunkt.");
+        }
+        else if (!legalRepetisjonssekvens(repetisjonssekvens.getText())) {
+            System.out.println("Repetisjonssekvens må være tall.");
+        }
+        else {
+            System.out.println("riktig");
+        }
     }
 
-
-    private void print(String string) {
-        System.out.println(string);
-    }
 }
